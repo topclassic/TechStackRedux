@@ -1,12 +1,15 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, LayoutAnimation,StyleSheet } from 'react-native';
 import {connect} from 'react-redux'
 import {CardSection} from './common'
 import * as actions from '../actions'
 
 // create a component
 class ListItem extends Component {
+    componentWillUpdate(){ 
+        LayoutAnimation.spring()
+    }
     renderDescription(){
         const {library, expanded} = this.props
 
