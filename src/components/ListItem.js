@@ -8,20 +8,25 @@ import * as actions from '../actions'
 // create a component
 class ListItem extends Component {
     renderDescription(){
-        const {library, SelectedLibraryId} = this.props
+        const {library, expanded} = this.props
 
-        if(library.id === SelectedLibraryId){ //match id to touch in list for show description
+        if(expanded){
             return(
                 <Text>{library.description}</Text>
             )
         }
+        // if(library.id === SelectedLibraryId){ //match id to touch in list for show description
+            // return(
+                // <Text>{library.description}</Text>
+        // }
     }
     render() {
         const {titleStyle} = styles
         const {id, tittle} = this.props.library
         console.log(this.props)
         return (
-            <TouchableWithoutFeedback onPress = {() => this.props.selectLibrary(id)}>
+            //Call action in TouchableWithoutFeedback from selectLibrary and send parameter id
+            <TouchableWithoutFeedback onPress = {() => this.props.selectLibrary(id)}> 
                 <View>
                     <CardSection>
                         <Text style={titleStyle}>{this.props.library.title}</Text>
@@ -33,10 +38,13 @@ class ListItem extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        SelectedLibraryId: state.SelectedLibraryId
-    }
+const mapStateToProps = (state,ownProps) => {
+    const expanded = state.SelectedLibraryId === ownProps.library.id //can set logic out of component
+    return {expanded}
+
+   // return {
+       // SelectedLibraryId: state.SelectedLibraryId //SelectedLibraryId keep in store can mapStateToProps 
+   // }
 }
 
 const styles = StyleSheet.create({

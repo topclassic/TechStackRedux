@@ -19,7 +19,8 @@ import LibraryList from './components/LibraryList'
 
 const App = () =>{
     return (
-        <Provider store={createStore(reducers)}>
+        // use Provider create store for use object in reducers all components
+        <Provider store={createStore(reducers)}> 
             <View style={{flex:1}}>
                 <Header headerText="Tech Stack"/>
                 <LibraryList/>
