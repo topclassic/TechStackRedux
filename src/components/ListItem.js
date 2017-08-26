@@ -7,6 +7,15 @@ import * as actions from '../actions'
 
 // create a component
 class ListItem extends Component {
+    renderDescription(){
+        const {library, SelectedLibraryId} = this.props
+
+        if(library.id === SelectedLibraryId){ //match id to touch in list for show description
+            return(
+                <Text>{library.description}</Text>
+            )
+        }
+    }
     render() {
         const {titleStyle} = styles
         const {id, tittle} = this.props.library
@@ -17,9 +26,16 @@ class ListItem extends Component {
                     <CardSection>
                         <Text style={titleStyle}>{this.props.library.title}</Text>
                     </CardSection>
+                    {this.renderDescription()}
                 </View>
             </TouchableWithoutFeedback>
         );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        SelectedLibraryId: state.SelectedLibraryId
     }
 }
 
@@ -30,4 +46,4 @@ const styles = StyleSheet.create({
     },
 });
 //make this component available to the app
-export default connect(null, actions)(ListItem);
+export default connect(mapStateToProps, actions)(ListItem);
